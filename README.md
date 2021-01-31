@@ -1,4 +1,4 @@
-# Two not touch
+# Don't QuHack this - a quantum solution to Two not touch
 Teammembers: Dominic Rogetzer, Johannes Seelig, Carina Heinreichsberger, discussion partner: Andreas Weniger
 
 Two not touch is a sudoku like game, where you have a map with certaina areas, which should be filled with stars, according to specific rules:
@@ -36,17 +36,20 @@ Usually this game has a 10x10 Board, but we simplified it to a 4x4 field, with o
 
 
 1.) One Stars per line
+
 Our first constraint implements the rule, that only one star per line is allowed. This means, that if we add up all the cells in one line, the sum must be 1. This needs to be done for all lines, which results in Constraint 1:
 SUM_{j=0}^4 [ SUM_{i=0}^4(x_{i,j})-1]^2 = 0
 [Bild](https://latex.codecogs.com/gif.latex?\sum_{j=0}^4&space;\left[&space;\sum_{i=0}^4(x_{i,j})-1&space;\right]^2&space;=&space;0)
 
 
 2.) One stars per row
+
 Now we are doing the exact same thing as in 1.) Since we are now checking the rows and not the lines, the indices are switch, resulting in:
 Constraint 2: SUM_{i=0}^4 [ SUM_{j=0}^4(x_{i,j})-1]^2 = 0
 [Bild](https://latex.codecogs.com/gif.latex?\sum_{i=0}^4&space;\left[&space;\sum_{j=0}^4(x_{i,j})-1&space;\right]^2&space;=&space;0)
 
 3.) One stars per region
+
 The regions are given to the code as matrix:
 
 [Bild](img/board.png)
@@ -60,6 +63,7 @@ The inner sum checks all cells within a region, allowing only one star to be pre
 
 
 4.) Don't touch this ~dumdududum
+
 The idea behind this part is: If x=1 then y=0. This can be formulated as constraint simply by xy=0.
 Let's combine this with our problem. If a star is present in a cell, the cell has the value 1, and all surrounding cells need to be 0. If the cell is x_ij, the surrounding cells are x_i-1,j-1, x_i-1, j x_i-1,j+1 .... x_i+1,j-1, x_i+1, j x_i+1,j+1 Therefor we create a Set U_ij of all indices and formulate the constraint:
 
@@ -68,6 +72,7 @@ constraint 4: SUM_ij (SUM_{r_0 element U_{ij}} x_{ij} x_{r_0})
 
 
 5.) QUBO
+
 Thanks to the linearity of the QUBO we can simply add all our constraints. Since writing this down by hand will result in pages of calculations, we coded a solver, that takes the sums and vereinfacht it to a linearcombination, which we can then give to the exactsolver. 
 
 # Testrun
