@@ -72,8 +72,10 @@ Thanks to the linearity of the QUBO we can simply add all our constraints. Since
 # Testrun
 
 
-# ToDO
-Sadly our time ran out befor we could implement everything we wanted to do.
+# ToDO / Troubles
+Sadly our time ran out befor we could fix all errors. Currently our program is killed when computed in Leap IDE. This is the major thing we would love to fix if we had more time. 
+
+Other things we wanted to implement:
 * input/ output file
 * 10x10 boards
 * nicer design with grafic output
