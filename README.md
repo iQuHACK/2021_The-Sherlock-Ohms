@@ -73,10 +73,10 @@ constraint 4: SUM_ij (SUM_{r_0 element U_{ij}} x_{ij} x_{r_0})
 
 5.) QUBO
 
-Thanks to the linearity of the QUBO we can simply add all our constraints. Since writing this down by hand will result in pages of calculations, we coded a solver, that takes the sums and vereinfacht it to a linearcombination, which we can then give to the exactsolver. 
+Thanks to the linearity of the QUBO we can simply add all our constraints. Since writing this down by hand will result in pages of calculations, we coded a solver, that takes the sums and simplyfies it to a linearcombination, which we can then give to the exactsolver. 
 
 # Testrun
-
+Our Program is able to take the constrains, and simplyfies them to a linearcombination. Then it changes their form, so that it can be read by the exactsolver.
 
 # ToDO / Troubles
 Sadly our time ran out befor we could fix all errors. Currently our program is killed when computed in Leap IDE. This is the major thing we would love to fix if we had more time. 
