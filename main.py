@@ -9,6 +9,7 @@ import numpy as np
 
 from painter import paintbox
 def main():
+
     """setup"""
     star_max  = 1
     gamma     = 1
@@ -22,23 +23,21 @@ def main():
 
     """ Setup Poly for Lines """
     for i in range(shape[0]):
-        a   = sympy.Sum(sympy.Sum(sympy.Indexed('x',(k,p)),(k,0,shape[0]-1)),(p,i,i))
-    #    print("Poly_Lin",a.doit())
+        a         = sympy.Sum(sympy.Sum(sympy.Indexed('x',(k,p)),(k,0,shape[0]-1)),(p,i,i))
         poly_lin += (a.doit()-star_max)**2
 
     """ Setup Poly for Cols """
     for j in range(shape[1]):
-        b   = sympy.Sum(sympy.Sum(sympy.Indexed('x',(k,p)),(k,j,j)),(p,0,shape[1]-1))
-    #    print("Poly_Col",b.doit())
+        b         = sympy.Sum(sympy.Sum(sympy.Indexed('x',(k,p)),(k,j,j)),(p,0,shape[1]-1))
         poly_col += (b.doit()-star_max)**2
 
-    """ Hardcoded boxes for a 4x4 two-not-touch """
+    """ Hardcoded Blocks for a 4x4 two-not-touch """
     box_ids   = np.array(([0,0,1,1],[2,0,1,1],[2,3,3,3],[2,2,3,3]))
 
     """ Setup Poly for Blocks """
-    c_arr=[]
+    c_arr = []
     for k in range(nr_blocks):
-        d_arr=[]
+        d_arr = []
         for i in range(shape[0]):
             for j in range(shape[1]):
                 if box_ids[i,j] == k:
@@ -50,10 +49,6 @@ def main():
         sumer     = (sum(c_arr[i][j] for j in range(len(c_arr[i])))-star_max)**2
         poly_box += sumer.doit()
 
-
-
-
-
     neighbors = lambda x, y : [(x2, y2) for x2 in range(x-1, x+2)
                                    for y2 in range(y-1, y+2)
                                    if (-1 < x <= shape[0] and
@@ -61,16 +56,16 @@ def main():
                                        (x != x2 or y != y2) and
                                        (0 <= x2 <= shape[0]) and
                                        (0 <= y2 <= shape[1]))]
-    dd_arr=[]
+    dd_arr = []
     for i in range(shape[0]):
         for j in range(shape[1]):
-            ee_arr=[]
+            ee_arr = []
             for pair in neighbors(i,j):
                 ee_arr.append(sympy.Indexed('x',(pair[0],pair[1])))
             dd_arr.append(ee_arr)
-    poly_neighbor=0
+    poly_neighbor = 0
     for i in range(len(dd_arr)):
-        sumer=sum(dd_arr[i][j] for j in range(len(dd_arr[i])))
+        sumer = sum(dd_arr[i][j] for j in range(len(dd_arr[i])))
         poly_neighbor+=sumer.doit()
 
     print("Lin_poly\n",poly_lin,"\n")
@@ -79,16 +74,14 @@ def main():
     print("Nei_Poly\n",poly_neighbor)
     print()
 
-
-
-    po=sympy.Poly(gamma*(poly_lin+poly_col+poly_box+poly_neighbor))
+    po     = sympy.Poly(gamma*(poly_lin+poly_col+poly_box+poly_neighbor))
     coeffs = po.coeffs()
     mono   = po.monoms()
 
     """
     Shift x^2 to x vals
     """
-    coeffs_new= coeffs.copy()
+    coeffs_new = coeffs.copy()
     for i in range(len(coeffs)):
         for j in range(len(mono[i])):
             assert mono[i][j] < 3
@@ -117,7 +110,7 @@ def main():
 
     index_n_val=[]
 
-    """reform indexes to Q Dict-format"""
+    """Reform indexes to Q Dict-format"""
     for i in range(len(mono)):
         indexes=np.where(mono[i])[0]
 
@@ -132,7 +125,7 @@ def main():
     dict1={}
     for i in range(len(index_n_val)):
         dict1[(index_n_val[i][0][0],index_n_val[i][0][1])]=index_n_val[i][1]
-    print("\nDICT",dict1)
+    print("\nDICT\n",dict1)
 
     paintbox(shape)
 
