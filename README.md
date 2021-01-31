@@ -80,7 +80,7 @@ constraint 4: SUM_ij (SUM_{r_0 element U_{ij}} x_{ij} x_{r_0})
 Thanks to the linearity of the QUBO we can simply add all our constraints. Since writing this down by hand will result in pages of calculations, we coded a solver, that takes the sums and simplyfies it to a linearcombination, which we can then give to the exactsolver. 
 
 # Testrun
-Our Program is able to take the constrains, and simplyfies them to a linearcombination. Then it changes their form, so that it can be read by the exactsolver.
+Our Program is able to take the constraints, and simplyfies them to a linearcombination. Then it changes their form, so that it can be read by the exactsolver (Q-dictionary).
 
 # ToDO / Troubles
 Sadly our time ran out befor we could fix all errors. Currently our program is killed when computed in Leap IDE. This is the major thing we would love to fix if we had more time. 
@@ -88,4 +88,4 @@ Sadly our time ran out befor we could fix all errors. Currently our program is k
 Other things we wanted to implement:
 * input/ output file
 * 10x10 boards
-* nicer design with grafic output
+* nicer design with graphic output
