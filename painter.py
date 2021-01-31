@@ -10,11 +10,11 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FixedLocator
 
 def paintbox(shape):
-
+    """Hard coded version of box implementation"""
     xx=np.reshape(np.zeros(shape[0]*shape[1]), newshape=(shape[1],shape[0]))
     plt.imshow(xx)
 
-    minor_locator1 = FixedLocator(np.arange(0.5,shape[0]+0.5,1))#AutoMinorLocator(2)
+    minor_locator1 = FixedLocator(np.arange(0.5,shape[0]+0.5,1))
     minor_locator2 = FixedLocator(np.arange(0.5,shape[1]+0.5,1))
     plt.xlim(-0.5,shape[0]-0.5)
     plt.ylim(-0.5,shape[1]-0.5)

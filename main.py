@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 """
 QUBO Two-Not-Touch
-@author: johannesseelig
 """
 import sympy
 import numpy as np
-
 from painter import paintbox
+
+def sumSum(start1,end1,start2,end2):
+    #Here would be a nice place for all the sympy.Sum/sympy.Sum lines
+    return 0
 def main():
 
     """setup"""
