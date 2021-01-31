@@ -39,14 +39,16 @@ Usually this game has a 10x10 Board, but we simplified it to a 4x4 field, with o
 
 Our first constraint implements the rule, that only one star per line is allowed. This means, that if we add up all the cells in one line, the sum must be 1. This needs to be done for all lines, which results in Constraint 1:
 SUM_{j=0}^4 [ SUM_{i=0}^4(x_{i,j})-1]^2 = 0
-[Bild](https://latex.codecogs.com/gif.latex?\sum_{j=0}^4&space;\left[&space;\sum_{i=0}^4(x_{i,j})-1&space;\right]^2&space;=&space;0)
+
+![Bild](https://latex.codecogs.com/gif.latex?\sum_{j=0}^4&space;\left[&space;\sum_{i=0}^4(x_{i,j})-1&space;\right]^2&space;=&space;0)
 
 
 2.) One stars per row
 
 Now we are doing the exact same thing as in 1.) Since we are now checking the rows and not the lines, the indices are switch, resulting in:
 Constraint 2: SUM_{i=0}^4 [ SUM_{j=0}^4(x_{i,j})-1]^2 = 0
-[Bild](https://latex.codecogs.com/gif.latex?\sum_{i=0}^4&space;\left[&space;\sum_{j=0}^4(x_{i,j})-1&space;\right]^2&space;=&space;0)
+
+![Bild](https://latex.codecogs.com/gif.latex?\sum_{i=0}^4&space;\left[&space;\sum_{j=0}^4(x_{i,j})-1&space;\right]^2&space;=&space;0)
 
 3.) One stars per region
 
@@ -57,7 +59,8 @@ The regions are given to the code as matrix:
 
 As can be see in the picture above each region has it's own identifier. Here we have four regions. The idea is, that the constraint checks, if there is a star within a region, leading to the formula:
 SUM_{k=0}^|R| [(SUM_{(ij) element in R_k} x_{ij}) -1]^2 =0
-[Bild](https://latex.codecogs.com/gif.latex?\sum_{k=0}^{|R|}&space;\left[\left(\sum_{(ij)&space;\;\epsilon&space;\;R_k}&space;x_{ij}\right)&space;-1\right]^2&space;=0)
+
+![Bild](https://latex.codecogs.com/gif.latex?\sum_{k=0}^{|R|}&space;\left[\left(\sum_{(ij)&space;\;\epsilon&space;\;R_k}&space;x_{ij}\right)&space;-1\right]^2&space;=0)
 
 The inner sum checks all cells within a region, allowing only one star to be present. The outer sum traverses all other regions.
 
@@ -68,7 +71,8 @@ The idea behind this part is: If x=1 then y=0. This can be formulated as constra
 Let's combine this with our problem. If a star is present in a cell, the cell has the value 1, and all surrounding cells need to be 0. If the cell is x_ij, the surrounding cells are x_i-1,j-1, x_i-1, j x_i-1,j+1 .... x_i+1,j-1, x_i+1, j x_i+1,j+1 Therefor we create a Set U_ij of all indices and formulate the constraint:
 
 constraint 4: SUM_ij (SUM_{r_0 element U_{ij}} x_{ij} x_{r_0})
-[Bild](https://latex.codecogs.com/gif.latex?\sum_{ij}&space;\sum_{r_0&space;\;&space;\epsilon\;&space;U_{ij}}&space;x_{ij}&space;x_{r_0})
+
+![Bild](https://latex.codecogs.com/gif.latex?\sum_{ij}&space;\sum_{r_0&space;\;&space;\epsilon\;&space;U_{ij}}&space;x_{ij}&space;x_{r_0})
 
 
 5.) QUBO
