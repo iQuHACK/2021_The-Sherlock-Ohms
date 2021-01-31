@@ -52,7 +52,7 @@ Constraint 2: SUM_{i=0}^4 [ SUM_{j=0}^4(x_{i,j})-1]^2 = 0
 
 The regions are given to the code as matrix:
 
-[Bild](img/board.png)
+![Bild](img/board.png)
 
 
 As can be see in the picture above each region has it's own identifier. Here we have four regions. The idea is, that the constraint checks, if there is a star within a region, leading to the formula:
