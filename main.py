@@ -24,13 +24,13 @@ def main():
     for i in range(shape[0]):
         a   = sympy.Sum(sympy.Sum(sympy.Indexed('x',(k,p)),(k,0,shape[0]-1)),(p,i,i))
     #    print("Poly_Lin",a.doit())
-        poly_lin += (a.doit()-1)**2
+        poly_lin += (a.doit()-star_max)**2
 
     """ Setup Poly for Cols """
     for j in range(shape[1]):
         b   = sympy.Sum(sympy.Sum(sympy.Indexed('x',(k,p)),(k,j,j)),(p,0,shape[1]-1))
     #    print("Poly_Col",b.doit())
-        poly_col += (b.doit()-1)**2
+        poly_col += (b.doit()-star_max)**2
 
     """ Hardcoded boxes for a 4x4 two-not-touch """
     box_ids   = np.array(([0,0,1,1],[2,0,1,1],[2,3,3,3],[2,2,3,3]))
@@ -47,7 +47,7 @@ def main():
 
     poly_box = 0
     for i in range(len(c_arr)):
-        sumer     = (sum(c_arr[i][j] for j in range(len(c_arr[i])))-1)**2
+        sumer     = (sum(c_arr[i][j] for j in range(len(c_arr[i])))-star_max)**2
         poly_box += sumer.doit()
 
 
